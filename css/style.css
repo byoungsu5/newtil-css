@@ -45,6 +45,11 @@
 	--color-background-onhover: rgba(var(--rgb-base-5), 0.7);
 	--color-icon-onactive: rgba(var(--rgb-main-1), 0.7);
 	--color-icon-onhover: rgba(var(--rgb-base-5), 0.7);
+
+	
+
+
+
 }
 
 @media (prefers-color-scheme: dark) {

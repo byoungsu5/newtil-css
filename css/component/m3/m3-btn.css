@@ -1,18 +1,87 @@
 .m3-btn
 {
-
-
+	--btn-color: var(--color-main-2);      /* 라이트 모드 컨테이너 */
+    --btn-label-color: var(--color-base-1);/* 라이트 모드 라벨(흰색) */
+    --btn-size: var(--icon-size-1);
+    --btn-weight: 500;
+    --btn-height: var(--btn-height-2);
+    --btn-padding: var(--btn-padding-2);
+    --btn-fill: 1;
 }
 
 /* 다크 모드 지원을 위한 미디어쿼리 스타일 추가 */
 
 @media (prefers-color-scheme: dark) {
 	.m3-btn {
-		
-	
+         /* 컨테이너 색 */
+         --btn-color: var(--color-main-1);
+
+         /* 라벨 색*/
+         --btn-label-color: var(--color-base-9);
+     }
+ 
+     /* 포커스 링  */
+     .m3-btn:focus-visible:not(:disabled),
+     .m3-btn--focus {
+         outline-color: #CCC2DC;
 	}
 }
 
 .m3-btn {
-	
+    /* 크기 & 여백 */
+    min-height: 40px;
+    padding: 0 16px;
+    border-radius: 40px;
+    border: none;
+
+    /* 레이아웃 */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    /* 배경 & 텍스트 */
+    background-color: var(--btn-color);
+    color: var(--btn-label-color);
+
+    /* 폰트 */
+    font-size: 14px;      /* 또는 var(--icon-size-1); */
+    font-weight: 500;
+    text-decoration: none;
+    text-transform: none;
+
+    /* 상호작용 기본 */
+    cursor: pointer;
+    outline: none;
+    transition: background-color 120ms ease-out,
+                box-shadow 120ms ease-out,
+                transform 120ms ease-out;
+}
+
+
+.m3-btn-disabled,
+.m3-btn:disabled{
+    background-color: color-mix(in srgb, var(--btn-color) 12%, transparent);
+    color: color-mix(in srgb, var(--btn-color) 38%, transparent);
+}
+
+.m3-btn-hover,
+.m3-btn:hover {
+    /* 컨테이너 색 92% + 흰색(레이블색) 8% */
+    background-color: color-mix(in srgb, var(--btn-color) 92%, var(--btn-label-color) 8%);
+}
+
+
+.m3-btn-focus,
+.m3-btn:focus {
+    /* 컨테이너 색 90% + 흰색 10% */
+    background-color: color-mix(in srgb,var(--btn-color) 90%, var(--btn-label-color) 10%);
+    outline: 3px solid #625B71;
+    outline-offset: 2px;
+}
+
+.m3-btn-active,
+.m3-btn:active {
+    /* 컨테이너 색 90% + 흰색 10% */
+    background-color: color-mix(in srgb, var(--btn-color) 90%, var(--btn-label-color) 10%);
 }
