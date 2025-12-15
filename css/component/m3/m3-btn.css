@@ -1,16 +1,23 @@
-.m3-btn
-{
-	--btn-color: var(--color-main-2);      /* 라이트 모드 컨테이너 */
-    --btn-label-color: var(--color-base-1);/* 라이트 모드 라벨(흰색) */
-    --btn-size: var(--icon-size-1);
-    --btn-weight: 500;
-    --btn-height: var(--btn-height-2);
-    --btn-padding: var(--btn-padding-2);
-    --btn-fill: 1;
-}
+.m3-btn{
+    /* colors */
+    --btn-container: var(--color-main-2);
+    --btn-label: var(--color-base-1);
+    --btn-outline: transparent;
+  
+    /* state layer */
+    --btn-state-layer-color: currentColor;
+    --btn-state-opacity: 0;
+  
+    /* size/shape */
+    --btn-height: var(--scale-22); /* 40 */
+    --btn-padding-x: var(--scale-10); /* 16 */
+    --btn-radius: var(--border-radius-8); /* full */
+    /* elevation */
+    --btn-shadow: none;
+  }
+  
 
 /* 다크 모드 지원을 위한 미디어쿼리 스타일 추가 */
-
 @media (prefers-color-scheme: dark) {
 	.m3-btn {
          /* 컨테이너 색 */
@@ -29,10 +36,11 @@
 
 .m3-btn {
     /* 크기 & 여백 */
-    min-height: 40px;
-    padding: 0 16px;
-    border-radius: 40px;
-    border: none;
+    position: relative;
+    min-height: calc(var(--btn-height) * 1px);
+    padding-inline: calc(var(--btn-padding-x) * 1px);
+    border-radius: var(--btn-radius);
+    border: var(--border-width-1) solid var(--btn-outline);
 
     /* 레이아웃 */
     display: inline-flex;
@@ -41,8 +49,9 @@
     gap: 8px;
 
     /* 배경 & 텍스트 */
-    background-color: var(--btn-color);
-    color: var(--btn-label-color);
+    background: var(--btn-container);
+    color: var(--btn-label);
+    box-shadow: var(--btn-shadow);    
 
     /* 폰트 */
     font-size: 14px;      /* 또는 var(--icon-size-1); */
@@ -58,30 +67,72 @@
                 transform 120ms ease-out;
 }
 
+.m3-btn::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius: inherit;
+    background: var(--btn-state-layer-color);
+    opacity: var(--btn-state-opacity);
+    pointer-events:none;
+  }
+
+  .m3-btn--filled{
+    --btn-container: var(--color-main-2);
+    --btn-label: var(--color-base-1);
+    --btn-outline: transparent;
+    --btn-shadow: none;
+  }
+  
+  .m3-btn--elevated{
+    --btn-container: var(--color-base-1); /* surface 계열로 매핑 */
+    --btn-label: var(--color-main-2);
+    --btn-outline: transparent;
+    --btn-shadow: var(--drop-shadow-2); /* 네 변수로 연결 */
+  }
+  
+  .m3-btn--tonal{
+    --btn-container: var(--color-base-3); /* secondary-container 계열로 매핑 */
+    --btn-label: var(--color-base-9);
+  }
+  
+  .m3-btn--outlined{
+    --btn-container: transparent;
+    --btn-label: var(--color-main-2);
+    --btn-outline: var(--color-base-5);
+  }
+  
+  .m3-btn--text{
+    --btn-container: transparent;
+    --btn-label: var(--color-main-2);
+    --btn-outline: transparent;
+    padding-inline: 0; /* text는 보통 컨테이너가 “없다” 느낌 */
+  }
+
 
 .m3-btn-disabled,
 .m3-btn:disabled{
-    background-color: color-mix(in srgb, var(--btn-color) 12%, transparent);
-    color: color-mix(in srgb, var(--btn-color) 38%, transparent);
-}
+    cursor: not-allowed;
+    opacity: 0.38; /* 또는 container/text를 따로 토큰화 */
+  }
 
 .m3-btn-hover,
-.m3-btn:hover {
-    /* 컨테이너 색 92% + 흰색(레이블색) 8% */
-    background-color: color-mix(in srgb, var(--btn-color) 92%, var(--btn-label-color) 8%);
-}
-
+.m3-btn:hover { --btn-state-opacity: 0.08; }
 
 .m3-btn-focus,
-.m3-btn:focus {
-    /* 컨테이너 색 90% + 흰색 10% */
-    background-color: color-mix(in srgb,var(--btn-color) 90%, var(--btn-label-color) 10%);
-    outline: 3px solid #625B71;
+.m3-btn:focus { --btn-state-opacity: 0.12; outline: 3px solid #625B71;
     outline-offset: 2px;
 }
 
 .m3-btn-active,
-.m3-btn:active {
-    /* 컨테이너 색 90% + 흰색 10% */
-    background-color: color-mix(in srgb, var(--btn-color) 90%, var(--btn-label-color) 10%);
-}
+.m3-btn:active { --btn-state-opacity: 0.12; }
+
+.m3-btn--xs{ --btn-height: var(--scale-17); --btn-padding-x: var(--scale-8); }  /* 28 / 14 */
+.m3-btn--sm{ --btn-height: var(--scale-19); --btn-padding-x: var(--scale-9); }  /* 32 / 15 */
+.m3-btn--md{ --btn-height: var(--scale-22); --btn-padding-x: var(--scale-10);}  /* 40 / 16 */
+.m3-btn--lg{ --btn-height: var(--scale-24); --btn-padding-x: var(--scale-13);}  /* 48 / 20 */
+.m3-btn--xl{ --btn-height: var(--scale-28); --btn-padding-x: var(--scale-15);}  /* 56 / 24 */
+
+.m3-btn--round  { --btn-radius: var(--border-radius-8); } /* 9999px */
+.m3-btn--square { --btn-radius: var(--border-radius-3); } /* 6px */
+
