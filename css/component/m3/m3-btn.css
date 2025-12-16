@@ -77,6 +77,8 @@
     pointer-events:none;
   }
 
+
+/* 타입(색깔) 종류 */
   .m3-btn--filled{
     --btn-container: var(--color-main-2);
     --btn-label: var(--color-base-1);
@@ -109,7 +111,7 @@
     padding-inline: 0; /* text는 보통 컨테이너가 “없다” 느낌 */
   }
 
-
+/* 상태 (state) 종류 */
 .m3-btn-disabled,
 .m3-btn:disabled{
     cursor: not-allowed;
@@ -127,12 +129,13 @@
 .m3-btn-active,
 .m3-btn:active { --btn-state-opacity: 0.12; }
 
+/* 사이즈 종류 */
 .m3-btn--xs{ --btn-height: var(--scale-17); --btn-padding-x: var(--scale-8); }  /* 28 / 14 */
 .m3-btn--sm{ --btn-height: var(--scale-19); --btn-padding-x: var(--scale-9); }  /* 32 / 15 */
 .m3-btn--md{ --btn-height: var(--scale-22); --btn-padding-x: var(--scale-10);}  /* 40 / 16 */
 .m3-btn--lg{ --btn-height: var(--scale-24); --btn-padding-x: var(--scale-13);}  /* 48 / 20 */
 .m3-btn--xl{ --btn-height: var(--scale-28); --btn-padding-x: var(--scale-15);}  /* 56 / 24 */
 
+/* 모양 종류 */
 .m3-btn--round  { --btn-radius: var(--border-radius-8); } /* 9999px */
 .m3-btn--square { --btn-radius: var(--border-radius-3); } /* 6px */
-
